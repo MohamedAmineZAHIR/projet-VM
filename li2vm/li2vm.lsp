@@ -1,6 +1,7 @@
 (defun make-lst(nom-lst)
   (progn 
     (setf (get nom-lst ':corps) ())
+    (setf (get nom-lst ':defun) ())
     )
   )
 
@@ -37,6 +38,7 @@
    ((equal (car expr) :var) (li2vm-var (cdr expr) env lst))
    ((equal (car expr) :call) (li2vm-call expr env lst))
    ((equal (car expr) :if) (li2vm-if expr env lst))
+   ((equal (car expr) :defun (li2vm-defun expr env lst)))
    )
   )
 
@@ -61,3 +63,28 @@
   (li2vm (fourth expr) env lst)
   )
 
+(defun li2vm-defun (expr env lst)
+ ; (format t "$> ~s ~%" expr)
+  ;(format t "$> ~s ~%" (first expr))
+  ;(format t "$> ~s ~%" (second expr))
+  ;(format t "$> ~s ~%" (third expr))
+  ;(format t "$> ~s ~%" (fourth expr))
+  (set-defun 
+   (list (second expr)) 
+   (cons 
+    (+ 1 (length (third expr)));taille env
+    (list (fourth expr));corps
+    )
+   lst
+   )
+  )
+
+(defun get-defun(nom-fonction)
+  (get nom-fonction ':defun))
+
+(defun set-defun(nom-fonction expr lst)
+  (setf (get lst ':defun) (cons (list nom-fonction expr) (get lst ':defun)))
+  )
+
+(defun make-stat-env (nenv x)
+  )

@@ -6,7 +6,8 @@
 ;(li2vm '(:if (:const A) (:const B) (:const C)) #(() 2) 'toto)
 ;(li2vm '(:call <= (:const A) (:const B))  #(() 2) 'toto)
 (li2vm '(:if (:call <= (:const A) (:const B))(:const C)(:const D)) #(() 2) 'toto)
-
+;(li2vm-defun '(:defun fact ((:var 1)) (:if (:call <= (:const A) (:const B))(:const C)(:const D))) #(() 2) 'toto)
+;(li2vm-defun '(:defun fibo ((:var 1)) (:if (:call <= (:const A) (:const B))(:const C)(:const D))) #(() 2) 'toto)
 
 
 
